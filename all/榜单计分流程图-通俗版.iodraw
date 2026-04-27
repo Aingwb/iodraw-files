@@ -17,7 +17,7 @@
           <mxGeometry x="980" y="-170" width="300" height="100" as="geometry" />
         </mxCell>
         <mxCell id="goods_consume" value="5. 计分服务消费消息&lt;br/&gt;识别是加分还是减分" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="1360" y="60" width="260" height="70" as="geometry" />
+          <mxGeometry x="1000" y="280" width="260" height="70" as="geometry" />
         </mxCell>
         <mxCell id="hit_cache" value="6. 先查缓存&lt;br/&gt;看这条创意命中哪些榜单对象&lt;br/&gt;没有就查库并回写短缓存" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="250" y="390" width="320" height="95" as="geometry" />
@@ -29,7 +29,7 @@
           <mxGeometry x="940" y="410" width="320" height="90" as="geometry" />
         </mxCell>
         <mxCell id="aggregate" value="9. 聚合消费者拿到延迟消息&lt;br/&gt;加锁后汇总未结算分数" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="1320" y="430" width="280" height="80" as="geometry" />
+          <mxGeometry x="1330" y="415" width="280" height="80" as="geometry" />
         </mxCell>
         <mxCell id="update_score" value="10. 更新榜单当前分数&lt;br/&gt;score = max(0, 原分 + 本次增量)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="1690" y="140" width="300" height="90" as="geometry" />

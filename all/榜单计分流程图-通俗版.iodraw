@@ -26,25 +26,25 @@
           <mxGeometry x="470" y="235" width="260" height="70" as="geometry" />
         </mxCell>
         <mxCell id="delay_msg" value="8. 发延迟消息（比如5分钟）&lt;br/&gt;用来批量汇总，减少数据库压力" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="790" y="225" width="320" height="90" as="geometry" />
+          <mxGeometry x="740" y="340" width="320" height="90" as="geometry" />
         </mxCell>
         <mxCell id="aggregate" value="9. 聚合消费者拿到延迟消息&lt;br/&gt;加锁后汇总未结算分数" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="1170" y="230" width="280" height="80" as="geometry" />
         </mxCell>
         <mxCell id="update_score" value="10. 更新榜单当前分数&lt;br/&gt;score = max(0, 原分 + 本次增量)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="1510" y="225" width="300" height="90" as="geometry" />
+          <mxGeometry x="1690" y="140" width="300" height="90" as="geometry" />
         </mxCell>
         <mxCell id="settled" value="11. 把本批流水标记为已结算&lt;br/&gt;避免重复计算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="80" y="540" width="260" height="70" as="geometry" />
         </mxCell>
         <mxCell id="cache_strategy" value="12. 缓存策略（数据优先）&lt;br/&gt;短过期 + 配置变更主动删缓存&lt;br/&gt;删了没关系，下次查库再生成" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="450" y="525" width="380" height="100" as="geometry" />
+          <mxGeometry x="460" y="610" width="380" height="100" as="geometry" />
         </mxCell>
         <mxCell id="daily_fix" value="13. 每日定时矫正（兜底）&lt;br/&gt;对账：日志汇总分 vs 当前分&lt;br/&gt;不一致就写修正日志并修正分数" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="850" y="360" width="360" height="110" as="geometry" />
+          <mxGeometry x="1020" y="650" width="360" height="110" as="geometry" />
         </mxCell>
         <mxCell id="manual_fix" value="14. 手动矫正接口（应急）&lt;br/&gt;可按榜单或榜单对象执行一次矫正" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="1280" y="375" width="300" height="80" as="geometry" />
+          <mxGeometry x="1600" y="720" width="300" height="80" as="geometry" />
         </mxCell>
         <mxCell id="end" value="完成" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="1660" y="385" width="120" height="60" as="geometry" />

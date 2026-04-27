@@ -35,10 +35,10 @@
           <mxGeometry x="1580" y="290" width="320" height="95" as="geometry" />
         </mxCell>
         <mxCell id="b6" value="发送延迟聚合消息&#xa;x-delay(毫秒)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="1590" y="477.5" width="320" height="65" as="geometry" />
+          <mxGeometry x="1580" y="500" width="320" height="65" as="geometry" />
         </mxCell>
         <mxCell id="b7" value="聚合消费者&#xa;对象维度加锁 -&gt; sum未结算流水&#xa;更新score=max(0,score+delta) -&gt; 标记已结算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="1570" y="640" width="360" height="95" as="geometry" />
+          <mxGeometry x="1560" y="650" width="360" height="95" as="geometry" />
         </mxCell>
         <mxCell id="b8" value="定时/手动矫正&#xa;对账(日志汇总分 vs 快照分)&#xa;写CORRECT日志并修正score" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="690" y="615" width="360" height="95" as="geometry" />

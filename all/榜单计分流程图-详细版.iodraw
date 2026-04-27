@@ -1,133 +1,303 @@
-<mxfile host="app.diagrams.net" modified="2026-04-27T08:20:00.000Z" agent="codex" version="24.7.17">
+<mxfile host="www.iodraw.com" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36" version="24.7.17" pages="5">
   <diagram id="overview" name="01-总览(多入口)">
-    <mxGraphModel dx="1800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="4148" dy="2170" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1200" math="0" shadow="0">
       <root>
-        <mxCell id="0"/><mxCell id="1" parent="0"/>
-        <mxCell id="a1" value="入口A：高并发事件&#xa;LIKE_ADD/THUMB_ADD/COMMENT_ADD/FOLLOW_ADD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1"><mxGeometry x="60" y="60" width="320" height="80" as="geometry"/></mxCell>
-        <mxCell id="a2" value="入口B：中低并发事件&#xa;LIKE_CANCEL/DELETE/OFFLINE/RECOMPUTE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="1"><mxGeometry x="60" y="170" width="320" height="80" as="geometry"/></mxCell>
-        <mxCell id="a3" value="入口C：手动刷新接口&#xa;全量/按榜单/按榜单对象/按条件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1"><mxGeometry x="60" y="280" width="320" height="80" as="geometry"/></mxCell>
-        <mxCell id="a4" value="入口D：每日定时矫正任务&#xa;对账并修正差异" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" vertex="1" parent="1"><mxGeometry x="60" y="390" width="320" height="80" as="geometry"/></mxCell>
-        <mxCell id="a5" value="入口E：初始化/重初始化&#xa;新增榜单/新增活动绑定触发" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1"><mxGeometry x="60" y="500" width="320" height="80" as="geometry"/></mxCell>
-
-        <mxCell id="b1" value="内容侧前置校验&#xa;自操作过滤、参数校验、构建MQ消息" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1"><mxGeometry x="450" y="80" width="330" height="90" as="geometry"/></mxCell>
-        <mxCell id="b2" value="消息分流&#xa;MQ-1(高并发) / MQ-2(中低并发)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1"><mxGeometry x="840" y="95" width="300" height="60" as="geometry"/></mxCell>
-        <mxCell id="b3" value="goods消费计分事件&#xa;识别eventType(加分/减分/重算)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1200" y="80" width="320" height="90" as="geometry"/></mxCell>
-        <mxCell id="b4" value="命中判定&#xa;Redis命中关系缓存 -> miss查库回填" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1580" y="80" width="320" height="90" as="geometry"/></mxCell>
-        <mxCell id="b5" value="写计分流水(真值)&#xa;tbl_activity_rank_score_log&#xa;幂等键防重" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1580" y="210" width="320" height="95" as="geometry"/></mxCell>
-        <mxCell id="b6" value="发送延迟聚合消息&#xa;x-delay(毫秒)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1200" y="225" width="320" height="65" as="geometry"/></mxCell>
-        <mxCell id="b7" value="聚合消费者&#xa;对象维度加锁 -> sum未结算流水&#xa;更新score=max(0,score+delta) -> 标记已结算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" vertex="1" parent="1"><mxGeometry x="800" y="210" width="360" height="95" as="geometry"/></mxCell>
-        <mxCell id="b8" value="定时/手动矫正&#xa;对账(日志汇总分 vs 快照分)&#xa;写CORRECT日志并修正score" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1200" y="370" width="360" height="95" as="geometry"/></mxCell>
-        <mxCell id="b9" value="写路径主动删缓存&#xa;评分配置/榜单/活动绑定变更后执行" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" vertex="1" parent="1"><mxGeometry x="800" y="370" width="360" height="95" as="geometry"/></mxCell>
-        <mxCell id="end" value="最终一致&#xa;日志为真值，快照为查询加速" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1660" y="390" width="240" height="70" as="geometry"/></mxCell>
-
-        <mxCell id="e1" style="endArrow=block;html=1;" edge="1" parent="1" source="a1" target="b1"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e2" style="endArrow=block;html=1;" edge="1" parent="1" source="a2" target="b1"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e3" style="endArrow=block;html=1;" edge="1" parent="1" source="b1" target="b2"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e4" style="endArrow=block;html=1;" edge="1" parent="1" source="b2" target="b3"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e5" style="endArrow=block;html=1;" edge="1" parent="1" source="b3" target="b4"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e6" style="endArrow=block;html=1;" edge="1" parent="1" source="b4" target="b5"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e7" style="endArrow=block;html=1;" edge="1" parent="1" source="b5" target="b6"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e8" style="endArrow=block;html=1;" edge="1" parent="1" source="b6" target="b7"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e9" style="endArrow=block;html=1;" edge="1" parent="1" source="a3" target="b8"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e10" style="endArrow=block;html=1;" edge="1" parent="1" source="a4" target="b8"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e11" style="endArrow=block;html=1;" edge="1" parent="1" source="a5" target="b9"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e12" style="endArrow=block;html=1;" edge="1" parent="1" source="b9" target="b4"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e13" style="endArrow=block;html=1;" edge="1" parent="1" source="b7" target="end"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e14" style="endArrow=block;html=1;" edge="1" parent="1" source="b8" target="end"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="a1" value="入口A：高并发事件&#xa;LIKE_ADD/THUMB_ADD/COMMENT_ADD/FOLLOW_ADD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="60" y="60" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="入口B：中低并发事件&#xa;LIKE_CANCEL/DELETE/OFFLINE/RECOMPUTE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="60" y="170" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="入口C：手动刷新接口&#xa;全量/按榜单/按榜单对象/按条件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="60" y="280" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="入口D：每日定时矫正任务&#xa;对账并修正差异" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="60" y="390" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" value="入口E：初始化/重初始化&#xa;新增榜单/新增活动绑定触发" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="60" y="500" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="内容侧前置校验&#xa;自操作过滤、参数校验、构建MQ消息" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="450" y="80" width="330" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="消息分流&#xa;MQ-1(高并发) / MQ-2(中低并发)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="840" y="95" width="300" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="goods消费计分事件&#xa;识别eventType(加分/减分/重算)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="80" width="320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="命中判定&#xa;Redis命中关系缓存 -&gt; miss查库回填" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="1580" y="80" width="320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="写计分流水(真值)&#xa;tbl_activity_rank_score_log&#xa;幂等键防重" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="1580" y="210" width="320" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="b6" value="发送延迟聚合消息&#xa;x-delay(毫秒)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="225" width="320" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="b7" value="聚合消费者&#xa;对象维度加锁 -&gt; sum未结算流水&#xa;更新score=max(0,score+delta) -&gt; 标记已结算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="800" y="210" width="360" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="b8" value="定时/手动矫正&#xa;对账(日志汇总分 vs 快照分)&#xa;写CORRECT日志并修正score" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="370" width="360" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="b9" value="写路径主动删缓存&#xa;评分配置/榜单/活动绑定变更后执行" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="800" y="370" width="360" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="end" value="最终一致&#xa;日志为真值，快照为查询加速" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="1660" y="390" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="endArrow=block;html=1;" parent="1" source="a1" target="b1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="endArrow=block;html=1;" parent="1" source="a2" target="b1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="endArrow=block;html=1;" parent="1" source="b1" target="b2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="endArrow=block;html=1;" parent="1" source="b2" target="b3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="endArrow=block;html=1;" parent="1" source="b3" target="b4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="endArrow=block;html=1;" parent="1" source="b4" target="b5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="endArrow=block;html=1;" parent="1" source="b5" target="b6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="endArrow=block;html=1;" parent="1" source="b6" target="b7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="endArrow=block;html=1;" parent="1" source="a3" target="b8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="endArrow=block;html=1;" parent="1" source="a4" target="b8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" style="endArrow=block;html=1;" parent="1" source="a5" target="b9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" style="endArrow=block;html=1;" parent="1" source="b9" target="b4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" style="endArrow=block;html=1;" parent="1" source="b7" target="end" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" style="endArrow=block;html=1;" parent="1" source="b8" target="end" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
-
   <diagram id="high" name="02-高并发入口明细">
     <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080">
       <root>
-        <mxCell id="0"/><mxCell id="1" parent="0"/>
-        <mxCell id="h1" value="点赞/点棒/评论新增" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="80" y="80" width="220" height="60" as="geometry"/></mxCell>
-        <mxCell id="h2" value="内容侧前置过滤&#xa;自己操作直接结束" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="360" y="70" width="260" height="80" as="geometry"/></mxCell>
-        <mxCell id="h3" value="发送MQ-1高并发事件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="690" y="80" width="220" height="60" as="geometry"/></mxCell>
-        <mxCell id="h4" value="goods消费" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1"><mxGeometry x="970" y="80" width="160" height="60" as="geometry"/></mxCell>
-        <mxCell id="h5" value="Redis取命中关系缓存&#xa;key: match:orig:{id}:factor:{key}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1"><mxGeometry x="1180" y="65" width="320" height="90" as="geometry"/></mxCell>
-        <mxCell id="h6" value="miss查库 + setEx短TTL(20s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1"><mxGeometry x="1180" y="180" width="320" height="60" as="geometry"/></mxCell>
-        <mxCell id="h7" value="写流水log(幂等)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="970" y="190" width="160" height="60" as="geometry"/></mxCell>
-        <mxCell id="h8" value="发延迟聚合消息(x-delay)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="690" y="190" width="220" height="60" as="geometry"/></mxCell>
-        <mxCell id="h9" value="聚合消费加锁&#xa;sum未结算 -> 更新score -> 标记结算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1"><mxGeometry x="360" y="175" width="260" height="90" as="geometry"/></mxCell>
-        <mxCell id="h10" value="完成" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="80" y="190" width="180" height="60" as="geometry"/></mxCell>
-        <mxCell id="he1" style="endArrow=block;html=1;" edge="1" parent="1" source="h1" target="h2"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="he2" style="endArrow=block;html=1;" edge="1" parent="1" source="h2" target="h3"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="he3" style="endArrow=block;html=1;" edge="1" parent="1" source="h3" target="h4"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="he4" style="endArrow=block;html=1;" edge="1" parent="1" source="h4" target="h5"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="he5" style="endArrow=block;html=1;" edge="1" parent="1" source="h5" target="h7"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="he6" style="endArrow=block;html=1;" edge="1" parent="1" source="h5" target="h6"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="he7" style="endArrow=block;html=1;" edge="1" parent="1" source="h6" target="h7"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="he8" style="endArrow=block;html=1;" edge="1" parent="1" source="h7" target="h8"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="he9" style="endArrow=block;html=1;" edge="1" parent="1" source="h8" target="h9"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="he10" style="endArrow=block;html=1;" edge="1" parent="1" source="h9" target="h10"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="h1" value="点赞/点棒/评论新增" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" value="内容侧前置过滤&#xa;自己操作直接结束" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="360" y="70" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="h3" value="发送MQ-1高并发事件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="690" y="80" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h4" value="goods消费" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="970" y="80" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h5" value="Redis取命中关系缓存&#xa;key: match:orig:{id}:factor:{key}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="65" width="320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="h6" value="miss查库 + setEx短TTL(20s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="180" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h7" value="写流水log(幂等)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="970" y="190" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h8" value="发延迟聚合消息(x-delay)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="690" y="190" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h9" value="聚合消费加锁&#xa;sum未结算 -&gt; 更新score -&gt; 标记结算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="360" y="175" width="260" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="h10" value="完成" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="80" y="190" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="he1" style="endArrow=block;html=1;" edge="1" parent="1" source="h1" target="h2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he2" style="endArrow=block;html=1;" edge="1" parent="1" source="h2" target="h3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he3" style="endArrow=block;html=1;" edge="1" parent="1" source="h3" target="h4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he4" style="endArrow=block;html=1;" edge="1" parent="1" source="h4" target="h5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he5" style="endArrow=block;html=1;" edge="1" parent="1" source="h5" target="h7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he6" style="endArrow=block;html=1;" edge="1" parent="1" source="h5" target="h6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he7" style="endArrow=block;html=1;" edge="1" parent="1" source="h6" target="h7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he8" style="endArrow=block;html=1;" edge="1" parent="1" source="h7" target="h8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he9" style="endArrow=block;html=1;" edge="1" parent="1" source="h8" target="h9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he10" style="endArrow=block;html=1;" edge="1" parent="1" source="h9" target="h10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
-
   <diagram id="midlow" name="03-中低并发入口明细">
     <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080">
       <root>
-        <mxCell id="0"/><mxCell id="1" parent="0"/>
-        <mxCell id="m1" value="取消点赞/删除评论/下架/重算事件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="80" y="80" width="300" height="70" as="geometry"/></mxCell>
-        <mxCell id="m2" value="发送MQ-2中低并发事件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="430" y="85" width="240" height="60" as="geometry"/></mxCell>
-        <mxCell id="m3" value="消费后按事件类型计算&#xa;LIKE_CANCEL=-coefficient&#xa;重算=按新系数重放" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="730" y="70" width="320" height="90" as="geometry"/></mxCell>
-        <mxCell id="m4" value="命中关系缓存取/回填" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1"><mxGeometry x="1110" y="85" width="220" height="60" as="geometry"/></mxCell>
-        <mxCell id="m5" value="写负向/重算流水日志" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="1390" y="85" width="220" height="60" as="geometry"/></mxCell>
-        <mxCell id="m6" value="发延迟聚合 -> 加锁聚合 -> 更新score -> 标记结算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1"><mxGeometry x="730" y="200" width="520" height="80" as="geometry"/></mxCell>
-        <mxCell id="m7" value="完成" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="1310" y="210" width="180" height="60" as="geometry"/></mxCell>
-        <mxCell id="me1" style="endArrow=block;html=1;" edge="1" parent="1" source="m1" target="m2"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="me2" style="endArrow=block;html=1;" edge="1" parent="1" source="m2" target="m3"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="me3" style="endArrow=block;html=1;" edge="1" parent="1" source="m3" target="m4"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="me4" style="endArrow=block;html=1;" edge="1" parent="1" source="m4" target="m5"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="me5" style="endArrow=block;html=1;" edge="1" parent="1" source="m5" target="m6"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="me6" style="endArrow=block;html=1;" edge="1" parent="1" source="m6" target="m7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="m1" value="取消点赞/删除评论/下架/重算事件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" value="发送MQ-2中低并发事件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="430" y="85" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" value="消费后按事件类型计算&#xa;LIKE_CANCEL=-coefficient&#xa;重算=按新系数重放" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="730" y="70" width="320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" value="命中关系缓存取/回填" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="85" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" value="写负向/重算流水日志" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="85" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="m6" value="发延迟聚合 -&gt; 加锁聚合 -&gt; 更新score -&gt; 标记结算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="730" y="200" width="520" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="m7" value="完成" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="210" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="me1" style="endArrow=block;html=1;" edge="1" parent="1" source="m1" target="m2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me2" style="endArrow=block;html=1;" edge="1" parent="1" source="m2" target="m3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me3" style="endArrow=block;html=1;" edge="1" parent="1" source="m3" target="m4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me4" style="endArrow=block;html=1;" edge="1" parent="1" source="m4" target="m5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me5" style="endArrow=block;html=1;" edge="1" parent="1" source="m5" target="m6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="me6" style="endArrow=block;html=1;" edge="1" parent="1" source="m6" target="m7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
-
   <diagram id="fix" name="04-定时+手动刷新入口">
     <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080">
       <root>
-        <mxCell id="0"/><mxCell id="1" parent="0"/>
-        <mxCell id="f1" value="入口1：每日定时任务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="80" y="70" width="220" height="60" as="geometry"/></mxCell>
-        <mxCell id="f2" value="入口2：手动刷新接口&#xa;全量/榜单/对象/条件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="80" y="160" width="220" height="70" as="geometry"/></mxCell>
-        <mxCell id="f3" value="构建目标对象集" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="360" y="105" width="220" height="60" as="geometry"/></mxCell>
-        <mxCell id="f4" value="逐对象对账&#xa;日志汇总分 vs 快照分" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="640" y="95" width="260" height="80" as="geometry"/></mxCell>
-        <mxCell id="f5" value="有差异？" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1"><mxGeometry x="960" y="100" width="120" height="70" as="geometry"/></mxCell>
-        <mxCell id="f6" value="写CORRECT修正日志&#xa;更新score为期望值" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1"><mxGeometry x="1140" y="95" width="280" height="80" as="geometry"/></mxCell>
-        <mxCell id="f7" value="输出批次报告&#xa;修正条数/失败条数/耗时" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="1480" y="95" width="260" height="80" as="geometry"/></mxCell>
-        <mxCell id="f8" value="结束" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="1780" y="105" width="120" height="60" as="geometry"/></mxCell>
-        <mxCell id="fe1" style="endArrow=block;html=1;" edge="1" parent="1" source="f1" target="f3"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="fe2" style="endArrow=block;html=1;" edge="1" parent="1" source="f2" target="f3"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="fe3" style="endArrow=block;html=1;" edge="1" parent="1" source="f3" target="f4"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="fe4" style="endArrow=block;html=1;" edge="1" parent="1" source="f4" target="f5"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="fe5" value="是" style="endArrow=block;html=1;" edge="1" parent="1" source="f5" target="f6"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="fe6" value="否" style="endArrow=block;html=1;" edge="1" parent="1" source="f5" target="f7"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="fe7" style="endArrow=block;html=1;" edge="1" parent="1" source="f6" target="f7"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="fe8" style="endArrow=block;html=1;" edge="1" parent="1" source="f7" target="f8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f1" value="入口1：每日定时任务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="70" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" value="入口2：手动刷新接口&#xa;全量/榜单/对象/条件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" value="构建目标对象集" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="360" y="105" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" value="逐对象对账&#xa;日志汇总分 vs 快照分" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="640" y="95" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" value="有差异？" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="960" y="100" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="f6" value="写CORRECT修正日志&#xa;更新score为期望值" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="95" width="280" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="f7" value="输出批次报告&#xa;修正条数/失败条数/耗时" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="95" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="f8" value="结束" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1780" y="105" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fe1" style="endArrow=block;html=1;" edge="1" parent="1" source="f1" target="f3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe2" style="endArrow=block;html=1;" edge="1" parent="1" source="f2" target="f3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe3" style="endArrow=block;html=1;" edge="1" parent="1" source="f3" target="f4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe4" style="endArrow=block;html=1;" edge="1" parent="1" source="f4" target="f5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe5" value="是" style="endArrow=block;html=1;" edge="1" parent="1" source="f5" target="f6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe6" value="否" style="endArrow=block;html=1;" edge="1" parent="1" source="f5" target="f7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe7" style="endArrow=block;html=1;" edge="1" parent="1" source="f6" target="f7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe8" style="endArrow=block;html=1;" edge="1" parent="1" source="f7" target="f8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
-
   <diagram id="redis" name="05-Redis时序(取/存/删)">
     <mxGraphModel dx="1800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1200">
       <root>
-        <mxCell id="0"/><mxCell id="1" parent="0"/>
-        <mxCell id="r1" value="缓存A：命中关系缓存&#xa;key=match:orig:{id}:factor:{key}&#xa;TTL=20s(可配)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="60" y="60" width="350" height="90" as="geometry"/></mxCell>
-        <mxCell id="r2" value="取：消费事件命中判定前&#xa;get(key)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="460" y="70" width="260" height="70" as="geometry"/></mxCell>
-        <mxCell id="r3" value="存：缓存miss且DB查到结果后&#xa;setEx(key,json,TTL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="770" y="70" width="300" height="70" as="geometry"/></mxCell>
-        <mxCell id="r4" value="删：配置/榜单/绑定变更后&#xa;delete(prefix*)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="1120" y="70" width="300" height="70" as="geometry"/></mxCell>
-
-        <mxCell id="r5" value="缓存B：作者缓存（可选）&#xa;key=author:{originalityId}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1"><mxGeometry x="60" y="200" width="350" height="80" as="geometry"/></mxCell>
-        <mxCell id="r6" value="当前口径：自操作由内容侧前置过滤&#xa;goods侧不再依赖该兜底" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1"><mxGeometry x="460" y="205" width="420" height="70" as="geometry"/></mxCell>
-
-        <mxCell id="r7" value="删缓存触发清单（已接入）&#xa;1) 评分配置新增/编辑/删除&#xa;2) 榜单新增/编辑/删除&#xa;3) 活动绑定新增/删除&#xa;4) 初始化/重初始化建议触发&#xa;5) 重算任务触发建议触发" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1"><mxGeometry x="60" y="340" width="520" height="170" as="geometry"/></mxCell>
-        <mxCell id="r8" value="一致性策略&#xa;短TTL + 主动删缓存 + 读时回源重建&#xa;日志为真值，快照为查询加速" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="640" y="360" width="420" height="130" as="geometry"/></mxCell>
-        <mxCell id="r9" value="注意&#xa;若使用remote-config&#xa;TTL配置需同步到各环境" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="1120" y="380" width="300" height="90" as="geometry"/></mxCell>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="r1" value="缓存A：命中关系缓存&#xa;key=match:orig:{id}:factor:{key}&#xa;TTL=20s(可配)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="350" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" value="取：消费事件命中判定前&#xa;get(key)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="460" y="70" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" value="存：缓存miss且DB查到结果后&#xa;setEx(key,json,TTL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="770" y="70" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" value="删：配置/榜单/绑定变更后&#xa;delete(prefix*)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="70" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" value="缓存B：作者缓存（可选）&#xa;key=author:{originalityId}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="200" width="350" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="r6" value="当前口径：自操作由内容侧前置过滤&#xa;goods侧不再依赖该兜底" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="460" y="205" width="420" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="r7" value="删缓存触发清单（已接入）&#xa;1) 评分配置新增/编辑/删除&#xa;2) 榜单新增/编辑/删除&#xa;3) 活动绑定新增/删除&#xa;4) 初始化/重初始化建议触发&#xa;5) 重算任务触发建议触发" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="60" y="340" width="520" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="r8" value="一致性策略&#xa;短TTL + 主动删缓存 + 读时回源重建&#xa;日志为真值，快照为查询加速" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="640" y="360" width="420" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="r9" value="注意&#xa;若使用remote-config&#xa;TTL配置需同步到各环境" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="380" width="300" height="90" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
 </mxfile>
-

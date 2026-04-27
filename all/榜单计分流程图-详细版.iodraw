@@ -32,7 +32,7 @@
           <mxGeometry x="1580" y="80" width="320" height="90" as="geometry" />
         </mxCell>
         <mxCell id="b5" value="写计分流水(真值)&#xa;tbl_activity_rank_score_log&#xa;幂等键防重" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="1590" y="295" width="320" height="95" as="geometry" />
+          <mxGeometry x="1580" y="290" width="320" height="95" as="geometry" />
         </mxCell>
         <mxCell id="b6" value="发送延迟聚合消息&#xa;x-delay(毫秒)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="1590" y="477.5" width="320" height="65" as="geometry" />

@@ -1,0 +1,97 @@
+<mxfile host="www.iodraw.com" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36" version="24.7.17">
+  <diagram id="rank-flow-simple" name="榜单计分流程图-通俗版">
+    <mxGraphModel dx="2074" dy="2165" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" value="1. 用户有行为&lt;br/&gt;（点赞/取消点赞）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="30" y="-70" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="content_filter" value="2. 内容服务先判断&lt;br/&gt;是不是自己给自己点赞&lt;br/&gt;是的话直接结束" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="435" y="-80" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="send_mq" value="3. 发送消息到MQ&lt;br/&gt;（带上事件类型和创意ID）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="450" y="-250" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="split_mq" value="4. 消息分两路&lt;br/&gt;高并发：点赞新增&lt;br/&gt;中低并发：取消/删除/重算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="980" y="-70" width="300" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="goods_consume" value="5. 计分服务消费消息&lt;br/&gt;识别是加分还是减分" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="1000" y="280" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="hit_cache" value="6. 先查缓存&lt;br/&gt;看这条创意命中哪些榜单对象&lt;br/&gt;没有就查库并回写短缓存" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="260" y="402.5" width="320" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="write_log" value="7. 写计分流水日志&lt;br/&gt;每次都记一笔，方便追溯" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="640" y="415" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="delay_msg" value="8. 发延迟消息（比如5分钟）&lt;br/&gt;用来批量汇总，减少数据库压力" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="970" y="405" width="320" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aggregate" value="9. 聚合消费者拿到延迟消息&lt;br/&gt;加锁后汇总未结算分数" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="1410" y="410" width="280" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="update_score" value="10. 更新榜单当前分数&lt;br/&gt;score = max(0, 原分 + 本次增量)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="1400" y="170" width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="settled" value="11. 把本批流水标记为已结算&lt;br/&gt;避免重复计算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="50" y="625" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="cache_strategy" value="12. 缓存策略（数据优先）&lt;br/&gt;短过期 + 配置变更主动删缓存&lt;br/&gt;删了没关系，下次查库再生成" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="460" y="610" width="380" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="daily_fix" value="13. 每日定时矫正（兜底）&lt;br/&gt;对账：日志汇总分 vs 当前分&lt;br/&gt;不一致就写修正日志并修正分数" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="1030" y="605" width="360" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="manual_fix" value="14. 手动矫正接口（应急）&lt;br/&gt;可按榜单或榜单对象执行一次矫正" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="1490" y="620" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="end" value="完成" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="1870" y="630" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="start" target="content_filter" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="content_filter" target="send_mq" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="send_mq" target="split_mq" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="split_mq" target="goods_consume" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="goods_consume" target="hit_cache" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="hit_cache" target="write_log" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="write_log" target="delay_msg" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="delay_msg" target="aggregate" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="aggregate" target="update_score" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="update_score" target="settled" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="settled" target="cache_strategy" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="cache_strategy" target="daily_fix" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="daily_fix" target="manual_fix" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" parent="1" source="manual_fix" target="end" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

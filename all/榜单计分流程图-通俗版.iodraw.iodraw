@@ -11,7 +11,7 @@
           <mxGeometry x="435" y="-80" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="send_mq" value="3. 发送消息到MQ&lt;br/&gt;（带上事件类型和创意ID）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="1000" y="-70" width="250" height="70" as="geometry" />
+          <mxGeometry x="1005" y="-70" width="250" height="70" as="geometry" />
         </mxCell>
         <mxCell id="split_mq" value="4. 消息分两路&lt;br/&gt;高并发：点赞新增&lt;br/&gt;中低并发：取消/删除/重算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="980" y="70" width="300" height="100" as="geometry" />
@@ -35,10 +35,10 @@
           <mxGeometry x="1460" y="510" width="300" height="90" as="geometry" />
         </mxCell>
         <mxCell id="settled" value="11. 把本批流水标记为已结算&lt;br/&gt;避免重复计算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="50" y="625" width="260" height="70" as="geometry" />
+          <mxGeometry x="60" y="740" width="260" height="70" as="geometry" />
         </mxCell>
         <mxCell id="cache_strategy" value="12. 缓存策略（数据优先）&lt;br/&gt;短过期 + 配置变更主动删缓存&lt;br/&gt;删了没关系，下次查库再生成" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="460" y="610" width="380" height="100" as="geometry" />
+          <mxGeometry x="470" y="725" width="380" height="100" as="geometry" />
         </mxCell>
         <mxCell id="daily_fix" value="13. 每日定时矫正（兜底）&lt;br/&gt;对账：日志汇总分 vs 当前分&lt;br/&gt;不一致就写修正日志并修正分数" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="1030" y="605" width="360" height="110" as="geometry" />

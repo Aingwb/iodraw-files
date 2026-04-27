@@ -11,10 +11,10 @@
           <mxGeometry x="435" y="-80" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="send_mq" value="3. 发送消息到MQ&lt;br/&gt;（带上事件类型和创意ID）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="450" y="-250" width="250" height="70" as="geometry" />
+          <mxGeometry x="1000" y="-70" width="250" height="70" as="geometry" />
         </mxCell>
         <mxCell id="split_mq" value="4. 消息分两路&lt;br/&gt;高并发：点赞新增&lt;br/&gt;中低并发：取消/删除/重算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="980" y="-70" width="300" height="100" as="geometry" />
+          <mxGeometry x="980" y="70" width="300" height="100" as="geometry" />
         </mxCell>
         <mxCell id="goods_consume" value="5. 计分服务消费消息&lt;br/&gt;识别是加分还是减分" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="1000" y="280" width="260" height="70" as="geometry" />

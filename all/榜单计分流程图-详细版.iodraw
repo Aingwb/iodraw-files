@@ -11,10 +11,10 @@
           <mxGeometry x="220" y="-160" width="320" height="80" as="geometry" />
         </mxCell>
         <mxCell id="a3" value="入口C：手动刷新接口&#xa;全量/按榜单/按榜单对象/按条件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="30" y="462.5" width="320" height="80" as="geometry" />
+          <mxGeometry x="40" y="320" width="320" height="80" as="geometry" />
         </mxCell>
         <mxCell id="a4" value="入口D：每日定时矫正任务&#xa;对账并修正差异" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="60" y="760" width="320" height="80" as="geometry" />
+          <mxGeometry x="10" y="770" width="320" height="80" as="geometry" />
         </mxCell>
         <mxCell id="a5" value="入口E：初始化/重初始化&#xa;新增榜单/新增活动绑定触发" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="1580" y="-450" width="320" height="80" as="geometry" />

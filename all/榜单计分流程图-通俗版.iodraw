@@ -11,7 +11,7 @@
           <mxGeometry x="360" y="50" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="send_mq" value="3. 发送消息到MQ&lt;br/&gt;（带上事件类型和创意ID）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="700" y="60" width="250" height="70" as="geometry" />
+          <mxGeometry x="420" y="-160" width="250" height="70" as="geometry" />
         </mxCell>
         <mxCell id="split_mq" value="4. 消息分两路&lt;br/&gt;高并发：点赞新增&lt;br/&gt;中低并发：取消/删除/重算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="980" y="-170" width="300" height="100" as="geometry" />

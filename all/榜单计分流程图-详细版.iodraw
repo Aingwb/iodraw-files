@@ -5,7 +5,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="a1" value="入口A：高并发事件&#xa;LIKE_ADD/THUMB_ADD/COMMENT_ADD/FOLLOW_ADD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="3115" y="-250" width="320" height="80" as="geometry" />
+          <mxGeometry x="3200" y="-330" width="320" height="80" as="geometry" />
         </mxCell>
         <mxCell id="a2" value="入口B：中低并发事件&#xa;LIKE_CANCEL/DELETE/OFFLINE/RECOMPUTE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="2710" y="-340" width="320" height="80" as="geometry" />
@@ -20,13 +20,13 @@
           <mxGeometry x="1580" y="-340" width="320" height="80" as="geometry" />
         </mxCell>
         <mxCell id="b1" value="内容侧前置校验&#xa;自操作过滤、参数校验、构建MQ消息" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="3110" y="80" width="330" height="90" as="geometry" />
+          <mxGeometry x="3030" y="70" width="330" height="90" as="geometry" />
         </mxCell>
         <mxCell id="b2" value="消息分流&#xa;MQ-1(高并发) / MQ-2(中低并发)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="2590" y="95" width="300" height="60" as="geometry" />
+          <mxGeometry x="2500" y="95" width="300" height="60" as="geometry" />
         </mxCell>
         <mxCell id="b3" value="goods消费计分事件&#xa;识别eventType(加分/减分/重算)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="2110" y="80" width="320" height="90" as="geometry" />
+          <mxGeometry x="2050" y="80" width="320" height="90" as="geometry" />
         </mxCell>
         <mxCell id="b4" value="命中判定&#xa;Redis命中关系缓存 -&gt; miss查库回填" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="1580" y="80" width="320" height="90" as="geometry" />

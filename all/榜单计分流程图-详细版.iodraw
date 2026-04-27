@@ -5,7 +5,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="a1" value="入口A：高并发事件&#xa;LIKE_ADD/THUMB_ADD/COMMENT_ADD/FOLLOW_ADD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="100" y="-80" width="320" height="80" as="geometry" />
+          <mxGeometry x="450" y="-150" width="320" height="80" as="geometry" />
         </mxCell>
         <mxCell id="a2" value="入口B：中低并发事件&#xa;LIKE_CANCEL/DELETE/OFFLINE/RECOMPUTE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="30" y="270" width="320" height="80" as="geometry" />

@@ -1,6 +1,6 @@
 <mxfile host="www.iodraw.com" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36" version="24.7.17" pages="5">
   <diagram id="overview" name="01-总览(多入口)">
-    <mxGraphModel dx="2183" dy="2342" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="2593" dy="2556" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -23,10 +23,10 @@
           <mxGeometry x="460" y="95" width="330" height="90" as="geometry" />
         </mxCell>
         <mxCell id="b2" value="消息分流&#xa;MQ-1(高并发) / MQ-2(中低并发)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="840" y="95" width="300" height="60" as="geometry" />
+          <mxGeometry x="2590" y="95" width="300" height="60" as="geometry" />
         </mxCell>
         <mxCell id="b3" value="goods消费计分事件&#xa;识别eventType(加分/减分/重算)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="1200" y="80" width="320" height="90" as="geometry" />
+          <mxGeometry x="2110" y="80" width="320" height="90" as="geometry" />
         </mxCell>
         <mxCell id="b4" value="命中判定&#xa;Redis命中关系缓存 -&gt; miss查库回填" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="1580" y="80" width="320" height="90" as="geometry" />

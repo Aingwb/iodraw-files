@@ -29,7 +29,7 @@
           <mxGeometry x="950" y="405" width="320" height="90" as="geometry" />
         </mxCell>
         <mxCell id="aggregate" value="9. 聚合消费者拿到延迟消息&lt;br/&gt;加锁后汇总未结算分数" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" parent="1" vertex="1">
-          <mxGeometry x="1340" y="410" width="280" height="80" as="geometry" />
+          <mxGeometry x="1410" y="410" width="280" height="80" as="geometry" />
         </mxCell>
         <mxCell id="update_score" value="10. 更新榜单当前分数&lt;br/&gt;score = max(0, 原分 + 本次增量)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="1690" y="140" width="300" height="90" as="geometry" />
